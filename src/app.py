@@ -597,6 +597,7 @@ with tab2:
             col = sort_map[sort_by]
             df = df.sort_values(col, ascending=asc)
 
+            confirm_key = "confirm_delete"
             for _, row in df.iterrows():
                 coef = row["valuation_coef"]
                 if pd.notna(coef):
@@ -608,8 +609,10 @@ with tab2:
                 sectors = (row["sectors"] or "").replace(",", "、")
 
                 created = pd.to_datetime(row["created_at"]).strftime("%m-%d %H:%M") if pd.notna(row["created_at"]) else "-"
-                row_key = "row_%s" % row["id"]
-                cols = st.columns([2.2, 1.5, 1, 0.8, 0.8, 0.7])
+                rid = row["id"]
+                row_key = "row_%s" % rid
+                confirming = st.session_state.get(confirm_key) == rid
+                cols = st.columns([2.2, 1.5, 1, 0.8, 0.8, 0.7, 0.5])
                 with cols[0]:
                     st.write("**%s**  (%s)" % (row["stock_name"], row["code"]))
                 with cols[1]:
@@ -622,7 +625,20 @@ with tab2:
                     st.markdown(badge, unsafe_allow_html=True)
                 with cols[5]:
                     if st.button("查看", key=row_key):
-                        st.session_state.view_report_id = row["id"]
+                        st.session_state.view_report_id = rid
                         st.rerun()
+                with cols[6]:
+                    if confirming:
+                        if st.button("确认", key="del_ok_%s" % rid):
+                            rdb.delete_report(conn, rid)
+                            st.session_state[confirm_key] = None
+                            st.rerun()
+                    else:
+                        if st.button("删除", key="del_%s" % rid):
+                            st.session_state[confirm_key] = rid
+                            st.rerun()
+            if st.session_state.get(confirm_key) and st.button("取消删除", key="cancel_del"):
+                st.session_state[confirm_key] = None
+                st.rerun()
 
 conn.close()

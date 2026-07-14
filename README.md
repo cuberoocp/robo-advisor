@@ -26,8 +26,16 @@
 
 ### 安装
 
+**方式一：pip 直接安装（推荐）**
+
 ```bash
-git clone https://github.com/your-username/robo-advisor.git
+pip install git+https://github.com/cuberoocp/robo-advisor.git
+```
+
+**方式二：本地克隆安装**
+
+```bash
+git clone https://github.com/cuberoocp/robo-advisor.git
 cd robo-advisor
 python -m venv .venv
 
@@ -56,11 +64,14 @@ LLM_MODEL=deepseek-chat
 ### 启动
 
 ```bash
-# Windows (必须设置 PYTHONNOUSERSITE 避免系统包冲突)
+# Windows（必须设置 PYTHONNOUSERSITE 避免系统包冲突）
 $env:PYTHONNOUSERSITE=1; streamlit run src/app.py --server.port 8501
 
 # macOS / Linux
 PYTHONNOUSERSITE=1 streamlit run src/app.py --server.port 8501
+
+# pip安装后也可以直接用模块启动
+python -m streamlit run src/app.py --server.port 8501
 ```
 
 打开浏览器访问 `http://localhost:8501`。
