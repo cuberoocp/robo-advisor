@@ -1,6 +1,6 @@
 [project]
 name = "robo-advisor"
-version = "0.1.1"
+version = "0.1.2"
 description = "A股估值分析 AI Agent — 基于财务数据的时间维度与行业维度判断股价高估/低估"
 requires-python = ">=3.11"
 dependencies = [
