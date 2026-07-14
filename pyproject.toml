@@ -1,0 +1,17 @@
+[project]
+name = "robo-advisor"
+version = "0.1.0"
+description = "A股估值分析 AI Agent — 基于财务数据的时间维度与行业维度判断股价高估/低估"
+requires-python = ">=3.11"
+dependencies = [
+    "akshare>=1.14.0",
+    "pandas>=2.0.0",
+    "streamlit>=1.28.0",
+    "openai>=1.0.0",
+    "httpx>=0.25.0",
+    "python-dotenv>=1.0.0",
+    "plotly>=5.18.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
