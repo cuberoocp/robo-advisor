@@ -24,6 +24,7 @@ Thumbs.db
 
 # Runtime data
 data/cache/cache.db
+*.log
 
 # Streamlit
 .streamlit/

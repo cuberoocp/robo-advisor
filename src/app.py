@@ -344,7 +344,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="main-header"><h1>📊 A股估值分析助手</h1><p>基于财务数据，从时间维度（历史对比）和板块维度（横向对比）分析股票估值水平</p></div>', unsafe_allow_html=True)
+st.markdown('<div class="main-header"><h1>📊 A股估值分析助手</h1><p>多维基本面 + AI 的 A 股估值分析工具</p></div>', unsafe_allow_html=True)
 
 with st.sidebar:
     st.header("⚙️ 设置")
